@@ -15,7 +15,7 @@ const SearchBar = () => {
 
     return (
         <div className='w-full h-full flex'>
-            <input className='h-10 self-center rounded-md p-2 flex flex-1 border-solid border-black border-2' type="text" value={query} onChange={handleInputChange} onKeyDown={handleSearch} placeholder='Search ...' />
+            <input className='h-10 self-center p-2 flex flex-1 border-solid border-black border-2' type="text" value={query} onChange={handleInputChange} onKeyDown={handleSearch} placeholder='Search ...' />
         </div>
     )
 }
