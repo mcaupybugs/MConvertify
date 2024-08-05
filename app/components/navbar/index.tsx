@@ -12,15 +12,14 @@ export enum AuthType {
 }
 
 const NavBar = () => {
-    const [authClicked, setAuthClicked] = useState(false);
-
+    const [authClicked, setAuthClicked] = useState(AuthType.Close);
     const toggleModal = (authCategory: AuthType) => {
-        setAuthClicked(!authClicked);
+        setAuthClicked(authCategory);
     }
 
     return (
         <div className='h-screen w-screen'>
-            { !authClicked && 
+            { authClicked == AuthType.Close && 
         <div className='w-full h-12 gradient-radial drop-shadow-xl'>
             <div className='flex flex-row justify-evenly items-center align-middle h-full w-full gap-2'>
                 <div className='items-start justify-start w-full m-8'>
@@ -34,8 +33,8 @@ const NavBar = () => {
             </div>
         </div>
 }
-        { authClicked &&
-        <Modal toggleAuth={toggleModal}></Modal>
+        { authClicked!=AuthType.Close &&
+        <Modal toggleAuth={toggleModal} authCategory={authClicked}></Modal>
 }  
         </div>
     )

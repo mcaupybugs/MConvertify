@@ -3,7 +3,7 @@ import { AuthType } from '../navbar';
 import SignIn from './signIn';
 import SignUp from './signUp';
 
-const Modal = ({toggleAuth}) => {
+const Modal = ({toggleAuth, authCategory}) => {
 
     const signInButton = useRef(null);
     const signUpButton = useRef(null);
@@ -26,8 +26,9 @@ const Modal = ({toggleAuth}) => {
     }
 
     useEffect(()=>{
-        makeActive(AuthType.Login);
-    }, [])
+        console.log(authCategory)
+        makeActive(authCategory);
+    }, [authCategory])
 
     return(
         <div className='flex bg-white/30 h-screen w-screen justify-center items-center text-black'>
