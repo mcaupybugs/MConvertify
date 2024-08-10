@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AuthType } from '../navbar';
 import SignIn from './signIn';
 import SignUp from './signUp';
@@ -7,6 +7,7 @@ const Modal = ({toggleAuth, authCategory}) => {
 
     const signInButton = useRef(null);
     const signUpButton = useRef(null);
+    const [modeActive, setModeActive] = useState(authCategory);
 
     const makeActive = (authSelected : AuthType) => {
         const inactiveClasses = "border-2 border-solid w-full ml-2 mr-2 text-slate-200 font-bold text-xl bg-slate-400"
@@ -23,10 +24,10 @@ const Modal = ({toggleAuth, authCategory}) => {
             signInElement.className = inactiveClasses;
             signUpElement.className = activeClasses;
         }
+        setModeActive(authSelected);
     }
 
     useEffect(()=>{
-        console.log(authCategory)
         makeActive(authCategory);
     }, [authCategory])
 
@@ -42,6 +43,10 @@ const Modal = ({toggleAuth, authCategory}) => {
                 <div className='flex flex-row justify-evenly w-full h-16 mt-2'>
                     <button className='border-2 border-solid w-full ml-4 text-slate-700 font-bold text-xl' ref={signInButton} onClick={() => makeActive(AuthType.Login)}>Sign In</button>
                     <button className='border-2 border-solid w-full mr-4 text-slate-700 font-bold text-xl' ref={signUpButton} onClick={() => makeActive(AuthType.SignUp)}>Sign Up</button>
+                </div>
+                <div className='flex flex-row'>
+                    {modeActive === AuthType.Login && <SignIn></SignIn>}
+                    {modeActive === AuthType.SignUp && <SignUp></SignUp>}
                 </div>
             </div>
         </div>
