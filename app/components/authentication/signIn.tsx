@@ -1,4 +1,6 @@
 import React from 'react';
+import {signIn} from '@/auth'
+import GoogleSignIn from './googleSignIn';
 
 const SignIn = () => {
     return (
@@ -16,6 +18,7 @@ const SignIn = () => {
                 <button className='w-full h-12 bg-slate-400 text-slate-700 font-bold'>Sign In</button>
             </div>
             <hr className='border-2 m-8 border-slate-700 border-solid'></hr>
+            <GoogleSignIn></GoogleSignIn>
         </div>
     )
 }
