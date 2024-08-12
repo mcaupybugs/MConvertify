@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { AuthType } from '../navbar';
 import SignIn from './signIn';
 import SignUp from './signUp';
+import { AuthType } from '@/app/enum/AuthEnum';
 
 const Modal = ({toggleAuth, authCategory}) => {
 
