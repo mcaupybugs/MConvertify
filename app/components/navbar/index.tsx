@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import SearchBar from '../searchBar';
 import Modal from '../authentication/modal';
 import Image from 'next/image'
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 
 export enum AuthType {
     Login = 0,
@@ -30,8 +30,16 @@ const NavBar = () => {
                 </div>
                 <SearchBar></SearchBar>
                 <div className=' flex flex-row gap-2 h-full w-full justify-end mr-4'>
-                    <button className='p-2 h-full rounded-md' onClick={() => toggleModal(AuthType.SignUp)}>SignUp</button>
-                    <button className='p-2 h-full rounded-md' onClick={()=> toggleModal(AuthType.Login)}>Login</button>
+                    { session.status !== "authenticated" &&
+                    <div>
+                        <button className='p-2 h-full rounded-md' onClick={() => toggleModal(AuthType.SignUp)}>Sign Up</button>
+                        <button className='p-2 h-full rounded-md' onClick={()=> toggleModal(AuthType.Login)}>Login</button>
+                    </div>
+}
+{
+                    session.status === "authenticated" &&
+                    <button className='p-2 h-full rounded-md' onClick={() => signOut()}>Sign Out</button>
+                }
                 </div>
             </div>
         </div>
