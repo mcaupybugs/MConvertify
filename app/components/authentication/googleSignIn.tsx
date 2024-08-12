@@ -4,6 +4,7 @@ import { signIn } from "next-auth/react";
 
 export default function SignIn() {
   return (
+    <div className="h-12 w-full pl-8 pr-8">
     <form
       onSubmit={(e) => {
         e.preventDefault();
@@ -11,7 +12,9 @@ export default function SignIn() {
         console.log(response);
       }}
     >
-      <button type="submit">Sign in with Google</button>
+      {/* create button UI */}
+      <button type="submit" className="h-12 w-full bg-red-500 text-white">Sign in with Google</button>
     </form>
+    </div>
   );
 }

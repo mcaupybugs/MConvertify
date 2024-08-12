@@ -14,7 +14,7 @@ const NavBar = () => {
     }
 
     const session = useSession();
-    console.log(session)
+
     return (
         <div className='h-screen w-screen'>
             { authClicked == AuthType.Close && 

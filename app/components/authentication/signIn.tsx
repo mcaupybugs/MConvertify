@@ -1,6 +1,7 @@
 import React from 'react';
 import {signIn} from '@/auth'
 import GoogleSignIn from './googleSignIn';
+import GithubSignIn from './githubSignIn';
 
 const SignIn = () => {
     return (
@@ -19,6 +20,7 @@ const SignIn = () => {
             </div>
             <hr className='border-2 m-8 border-slate-700 border-solid'></hr>
             <GoogleSignIn></GoogleSignIn>
+            <GithubSignIn></GithubSignIn>
         </div>
     )
 }
