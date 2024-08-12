@@ -7,7 +7,7 @@ export default function SignIn() {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        const response = signIn("google");
+        const response = signIn("google", {redirectTo: "/error"});
         console.log(response);
       }}
     >

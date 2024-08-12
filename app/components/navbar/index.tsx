@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import SearchBar from '../searchBar';
 import Modal from '../authentication/modal';
 import Image from 'next/image'
+import { useSession } from 'next-auth/react';
 
 export enum AuthType {
     Login = 0,
@@ -17,6 +18,8 @@ const NavBar = () => {
         setAuthClicked(authCategory);
     }
 
+    const session = useSession();
+    console.log(session)
     return (
         <div className='h-screen w-screen'>
             { authClicked == AuthType.Close && 
