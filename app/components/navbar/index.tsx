@@ -5,12 +5,7 @@ import SearchBar from '../searchBar';
 import Modal from '../authentication/modal';
 import Image from 'next/image'
 import { signOut, useSession } from 'next-auth/react';
-
-export enum AuthType {
-    Login = 0,
-    SignUp = 1,
-    Close = 2,
-}
+import { AuthType, AuthStatus } from '@/app/enum/AuthEnum';
 
 const NavBar = () => {
     const [authClicked, setAuthClicked] = useState(AuthType.Close);
@@ -30,14 +25,14 @@ const NavBar = () => {
                 </div>
                 <SearchBar></SearchBar>
                 <div className=' flex flex-row gap-2 h-full w-full justify-end mr-4'>
-                    { session.status !== "authenticated" &&
+                    { session.status === AuthStatus.Unauthenticated &&
                     <div>
                         <button className='p-2 h-full rounded-md' onClick={() => toggleModal(AuthType.SignUp)}>Sign Up</button>
                         <button className='p-2 h-full rounded-md' onClick={()=> toggleModal(AuthType.Login)}>Login</button>
                     </div>
 }
 {
-                    session.status === "authenticated" &&
+                    session.status == AuthStatus.Authenticated &&
                     <button className='p-2 h-full rounded-md' onClick={() => signOut()}>Sign Out</button>
                 }
                 </div>
