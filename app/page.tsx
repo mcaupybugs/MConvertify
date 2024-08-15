@@ -7,7 +7,7 @@ export default function Home() {
     document.body.classList.add('overflow-y-hidden')
   })
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex basis-10/12 min-h-screen flex-col items-center justify-between p-24">
       
     </main>
   );
