@@ -1,13 +1,21 @@
 import React from 'react';
-import {signIn} from '@/auth'
 import GithubSignIn from './githubSignIn';
 import GoogleSignIn from './googleSignIn';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
+import { faLock } from '@fortawesome/free-solid-svg-icons';
 
 const SignIn = () => {
     return (
         <div className='flex flex-col w-full mt-6'>
-            <input className='h-12 m-2 ml-8 mr-8 p-2 border-2 border-black' placeholder='Username'></input>
-            <input className='h-12 m-2 p-2 ml-8 mr-8 border-2 border-black' placeholder='Password'></input>
+            <div className='flex flex-row border-2 h-12 border-black place-items-center ml-8 mr-8'>
+            <FontAwesomeIcon className='flex h-full justify-center align-middle ml-2' size='xl' icon={faUser}></FontAwesomeIcon>
+            <input className='h-10 ml-2 w-full p-2 focus:outline-none' placeholder='Username'/>
+            </div>
+            <div className='flex flex-row border-2 h-12 border-black place-items-center ml-8 mr-8 m-2'>
+            <FontAwesomeIcon className='flex h-full justify-center align-middle ml-2' size='xl' icon={faLock}></FontAwesomeIcon>
+            <input className='h-10 ml-2 w-full p-2 focus:outline-none' placeholder='Password'></input>
+            </div>
             <div className='flex flex-row w-full h-full mt-4'>
                 <div className='flex flex-row ml-8 h-full w-full'>
                 <input className="h-4 justify-start items-start" type='checkbox' name='remember-me'></input>
