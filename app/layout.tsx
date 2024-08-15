@@ -7,6 +7,7 @@ import { SessionProvider } from "next-auth/react";
 
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
+import SideBar from "./components/sidebar";
 config.autoAddCss = false
   
 const inter = Inter({ subsets: ["latin"] });
@@ -26,10 +27,13 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <SessionProvider session={session}>
-      <NavBar></NavBar>
-      {children}
-      </SessionProvider>
-</body>
+          <NavBar></NavBar>
+          <div className="flex flex-row">
+            <SideBar></SideBar>
+            {children}
+          </div>
+        </SessionProvider>
+      </body>
     </html>
   );
 }
