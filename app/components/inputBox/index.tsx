@@ -2,7 +2,7 @@ import React from 'react';
 
 const InputBox = ({heading}) => {
     return  (
-        <div className='w-full h-full m-2'>
+        <div className='w-full h-full p-2'>
             <div className='w-full h-full flex flex-col'>
                 <div className='flex bg-slate-200 w-full h-10 text-black text-xl font-bold pl-2 items-center shadow-xl'>
                     {heading}

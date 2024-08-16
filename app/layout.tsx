@@ -27,11 +27,13 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`h-screen max-h-screen m-0 ${inter.className}`}>
         <SessionProvider session={session}>
-          <div className="h-full w-full flex-col">
+          <div className="h-screen w-full flex flex-col">
             <NavBar></NavBar>
-            <div className="flex flex-row h-full">
+            <div className="flex flex-1 flex-row overflow-hidden">
               <SideBar></SideBar>
+              <div className="flex-1 overflow-auto">
               {children}
+              </div>
             </div>
           </div>
         </SessionProvider>

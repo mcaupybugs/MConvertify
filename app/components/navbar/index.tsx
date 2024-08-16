@@ -16,10 +16,10 @@ const NavBar = () => {
     const session = useSession();
 
     return (
-        <div>
+        <div className='h-12 w-full'>
             { authClicked == AuthType.Close && 
-        <div className='w-full h-12 overflow-hidden gradient-radial drop-shadow-xl'>
-            <div className='flex flex-row justify-evenly items-center align-middle h-full w-full gap-2'>
+        <div className='w-full h-12 gradient-radial drop-shadow-xl'>
+            <div className='flex flex-row justify-evenly items-center align-middle h-full w-full'>
                 <div className='items-start justify-start w-full pl-8'>
                     <Image src="/logo.svg" alt='Logo' width={100} height={100} className='max-h-full'></Image>
                 </div>
