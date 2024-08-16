@@ -1,19 +1,19 @@
 'use client';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-const InputBox = ({heading, textCallback}) => {
+const InputBox = ({ heading, textCallback = null }) => {
 
     const [wordCount, setWordCount] = useState(0);
     const [linesCount, setLinesCount] = useState(0);
 
     const handleTextAreaChange = (e) => {
         const text = e.target.value;
-        if(textCallback){
+        if (textCallback) {
             textCallback(text);
         }
     }
 
-    return  (
+    return (
         <div className='w-full h-full p-2 border-2'>
             <div className='w-full h-full flex flex-col shadow-sm'>
                 <div className='flex bg-slate-300 w-full h-10 text-black text-xl font-bold pl-2 items-center shadow-xl'>
