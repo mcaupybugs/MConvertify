@@ -1,11 +1,13 @@
 'use client'
 import React, { useRef, useState } from 'react';
 import InputBox from '../../components/inputBox';
+import CompareTexts from '@/app/utils/textcomparer';
+import OutputBox from '@/app/components/outputBox';
 
 const TextComparer = () => {
     const [inputText, setInputText] = useState('');
     const [secondInputText, setSecondInputText] = useState('')
-    const [outputText, setOutputText] = useState('');
+    const [outputData, setOutputData] = useState<DocumentFragment>();
 
     const getInputText = (text: string) => {
         console.log(text);
@@ -17,8 +19,9 @@ const TextComparer = () => {
         setSecondInputText(text)
     }
 
-    const handleOperate = (e) => {
-
+    const handleOperate = async (e) => {
+        const diffFragment = await CompareTexts(inputText, secondInputText);
+        setOutputData(diffFragment);
     }
 
     return (
@@ -32,7 +35,7 @@ const TextComparer = () => {
                     <InputBox heading='Input 2' textCallback={getSecondInputText} ></InputBox>
                 </div>
                 <div className='w-full'>
-                    <InputBox heading='Output' optionalValue={outputText}></InputBox>
+                    <OutputBox heading='Output' outputValue={outputData}></OutputBox>
                 </div>
             </div>
         </div>
