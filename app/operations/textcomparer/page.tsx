@@ -20,6 +20,7 @@ const TextComparer = () => {
     }
 
     const handleOperate = async (e) => {
+        setOutputData(new DocumentFragment());
         const diffFragment = await CompareTexts(inputText, secondInputText);
         setOutputData(diffFragment);
     }
