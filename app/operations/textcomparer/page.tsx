@@ -1,9 +1,10 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import InputBox from '../../components/inputBox';
 
 const TextComparer = () => {
     const [inputText, setInputText] = useState('');
+    const [secondInputText, setSecondInputText] = useState('')
     const [outputText, setOutputText] = useState('');
 
     const getInputText = (text: string) => {
@@ -11,12 +12,13 @@ const TextComparer = () => {
         setInputText(text);
     }
 
-    const getOutputText = (text: string) => {
+    const getSecondInputText = (text: string) => {
         console.log(text);
-        setOutputText(text)
+        setSecondInputText(text)
     }
 
     const handleOperate = (e) => {
+
     }
 
     return (
@@ -27,10 +29,10 @@ const TextComparer = () => {
             <div className='flex flex-1 flex-row w-full h-full justify-evenly'>
                 <div className='flex flex-col w-full'>
                     <InputBox heading='Input 1' textCallback={getInputText}></InputBox>
-                    <InputBox heading='Input 2' textCallback={getOutputText} ></InputBox>
+                    <InputBox heading='Input 2' textCallback={getSecondInputText} ></InputBox>
                 </div>
                 <div className='w-full'>
-                    <InputBox heading='Output'></InputBox>
+                    <InputBox heading='Output' optionalValue={outputText}></InputBox>
                 </div>
             </div>
         </div>
