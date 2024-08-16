@@ -18,13 +18,13 @@ const NavBar = () => {
     return (
         <div>
             { authClicked == AuthType.Close && 
-        <div className='w-full h-12 gradient-radial drop-shadow-xl'>
+        <div className='w-full h-12 overflow-hidden gradient-radial drop-shadow-xl'>
             <div className='flex flex-row justify-evenly items-center align-middle h-full w-full gap-2'>
-                <div className='items-start justify-start w-full m-8'>
-                    <Image src="/logo.svg" alt='Logo' width={100} height={100}></Image>
+                <div className='items-start justify-start w-full pl-8'>
+                    <Image src="/logo.svg" alt='Logo' width={100} height={100} className='max-h-full'></Image>
                 </div>
                 <SearchBar></SearchBar>
-                <div className=' flex flex-row gap-2 h-full w-full justify-end mr-4'>
+                <div className=' flex flex-row gap-2 h-full w-full justify-end pr-4'>
                     { session.status === AuthStatus.Unauthenticated &&
                     <div>
                         <button className='p-2 h-full rounded-md' onClick={() => toggleModal(AuthType.SignUp)}>Sign Up</button>

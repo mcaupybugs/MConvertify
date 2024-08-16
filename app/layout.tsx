@@ -25,12 +25,14 @@ export default async function RootLayout({
   const session = await auth();
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`h-screen max-h-screen m-0 ${inter.className}`}>
         <SessionProvider session={session}>
-          <NavBar></NavBar>
-          <div className="flex flex-row">
-            <SideBar></SideBar>
-            {children}
+          <div className="h-full w-full flex-col">
+            <NavBar></NavBar>
+            <div className="flex flex-row h-full">
+              <SideBar></SideBar>
+              {children}
+            </div>
           </div>
         </SessionProvider>
       </body>
