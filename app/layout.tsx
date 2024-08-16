@@ -7,7 +7,6 @@ import { SessionProvider } from "next-auth/react";
 
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
-import SideBar from "./components/sidebar";
 config.autoAddCss = false
   
 const inter = Inter({ subsets: ["latin"] });
@@ -22,19 +21,18 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await auth();
+  const session = await auth();  
   return (
     <html lang="en">
       <body className={`h-screen max-h-screen m-0 ${inter.className}`}>
         <SessionProvider session={session}>
           <div className="h-screen w-full flex flex-col">
-            <NavBar></NavBar>
-            <div className="flex flex-1 flex-row overflow-hidden">
-              <SideBar></SideBar>
-              <div className="flex-1 overflow-auto">
-              {children}
+            <div className="z-10">
+              <NavBar></NavBar>
               </div>
-            </div>
+              <div className="flex-1 overflow-auto z-0">
+                {children}
+              </div>
           </div>
         </SessionProvider>
       </body>
