@@ -1,5 +1,5 @@
 import React from 'react';
-import InputBox from '../components/inputBox';
+import InputBox from '../../components/inputBox';
 
 const TextComparer = () => {
     return (

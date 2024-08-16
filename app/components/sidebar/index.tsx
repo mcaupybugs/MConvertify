@@ -8,7 +8,7 @@ const SideBar = () =>{
             <div className="w-full font-bold text-center underline">
                 Operations
             </div>
-            <Link href='/textcomparer'>Text Comparer</Link>
+            <Link href='/operations/textcomparer'>Text Comparer</Link>
         </div>
         </div>
     )
