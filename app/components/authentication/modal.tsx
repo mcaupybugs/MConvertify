@@ -32,8 +32,8 @@ const Modal = ({toggleAuth, authCategory}) => {
     }, [authCategory])
 
     return(
-        <div className='flex bg-white/30 h-screen w-screen justify-center items-center text-black'>
-            <div className='flex flex-col h-4/5 w-2/5 bg-white rounded-md'>
+        <div className='flex bg-white/90 h-screen w-screen justify-center items-center text-black'>
+            <div className='flex flex-col h-3/5 w-2/5 bg-white rounded-md border-2 border-black'>
                 <div className='flex flex-row justify-center items-center bg-slate-400'>
                     <span className='w-fit text-3xl items-start p-2 hover:cursor-pointer' onClick={() => toggleAuth(AuthType.Close)}> &#x2716; </span>
                     <div className='flex-grow flex justify-center items-center h-full'>

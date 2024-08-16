@@ -18,7 +18,7 @@ const NavBar = () => {
     const session = useSession();
 
     return (
-        <div className='h-12 w-full'>
+        <div className='h-12 w-full shadow-sm'>
             { authClicked == AuthType.Close && 
         <div className='w-full h-12 gradient-radial drop-shadow-xl'>
             <div className='flex flex-row justify-evenly items-center align-middle h-full w-full'>
