@@ -7,9 +7,9 @@ const InputBox = ({heading}) => {
     const [linesCount, setLinesCount] = useState(0);
 
     return  (
-        <div className='w-full h-full p-2'>
-            <div className='w-full h-full flex flex-col'>
-                <div className='flex bg-slate-200 w-full h-10 text-black text-xl font-bold pl-2 items-center shadow-xl'>
+        <div className='w-full h-full p-2 border-2'>
+            <div className='w-full h-full flex flex-col shadow-sm'>
+                <div className='flex bg-slate-300 w-full h-10 text-black text-xl font-bold pl-2 items-center shadow-xl'>
                     {heading}
                 </div>
                 <textarea className='h-full w-full flex-grow text-black focus:outline-none p-2'></textarea>
