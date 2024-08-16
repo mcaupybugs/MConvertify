@@ -1,10 +1,17 @@
 'use client';
 import React, {useState} from 'react';
 
-const InputBox = ({heading}) => {
+const InputBox = ({heading, textCallback}) => {
 
     const [wordCount, setWordCount] = useState(0);
     const [linesCount, setLinesCount] = useState(0);
+
+    const handleTextAreaChange = (e) => {
+        const text = e.target.value;
+        if(textCallback){
+            textCallback(text);
+        }
+    }
 
     return  (
         <div className='w-full h-full p-2 border-2'>
@@ -12,7 +19,7 @@ const InputBox = ({heading}) => {
                 <div className='flex bg-slate-300 w-full h-10 text-black text-xl font-bold pl-2 items-center shadow-xl'>
                     {heading}
                 </div>
-                <textarea className='h-full w-full flex-grow text-black focus:outline-none p-2 resize-none'></textarea>
+                <textarea className='h-full w-full flex-grow text-black focus:outline-none p-2 resize-none' onChange={handleTextAreaChange}></textarea>
                 <div className='h-6 w-full flex flex-row bg-slate-200 justify-evenly pl-1 pr-1'>
                     <div className='flex flex-row w-full'>
                         <div className='flex w-full text-black items-center'>
