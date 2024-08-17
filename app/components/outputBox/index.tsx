@@ -9,7 +9,7 @@ const OutputBox = ({ heading, outputValue }) => {
             var outputDiv = document.getElementById('output')
             if (outputDiv) {
                 outputDiv.innerHTML = ''
-                outputDiv.appendChild(outputValue)
+                outputDiv.innerHTML += outputValue;
             }
         }
     }, [outputValue])
@@ -20,7 +20,7 @@ const OutputBox = ({ heading, outputValue }) => {
                 <div className='flex bg-slate-300 w-full h-10 text-black text-xl font-bold pl-2 items-center shadow-xl'>
                     {heading}
                 </div>
-                <div id='output' className='h-full w-full flex-grow text-black bg-white focus:outline-none p-2'></div>
+                <div id='output' className='h-full w-full flex-grow text-black bg-white focus:outline-none p-2 text-lg'></div>
                 <div className='h-6 w-full flex flex-row bg-slate-200 justify-evenly pl-1 pr-1'>
                     <div className='flex flex-row w-full'>
                         <div className='flex w-full text-black items-center'>

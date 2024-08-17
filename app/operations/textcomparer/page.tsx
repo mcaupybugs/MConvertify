@@ -7,7 +7,7 @@ import OutputBox from '@/app/components/outputBox';
 const TextComparer = () => {
     const [inputText, setInputText] = useState('');
     const [secondInputText, setSecondInputText] = useState('')
-    const [outputData, setOutputData] = useState<DocumentFragment>();
+    const [outputData, setOutputData] = useState();
 
     const getInputText = (text: string) => {
         console.log(text);
@@ -20,7 +20,6 @@ const TextComparer = () => {
     }
 
     const handleOperate = async (e) => {
-        setOutputData(new DocumentFragment());
         const diffFragment = await CompareTexts(inputText, secondInputText);
         setOutputData(diffFragment);
     }

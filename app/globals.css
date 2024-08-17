@@ -28,3 +28,11 @@ body {
     text-wrap: balance;
   }
 }
+
+ins{
+  background-color: rgb(96, 213, 96);
+}
+
+del{
+  background-color: rgb(252, 164, 164);
+}

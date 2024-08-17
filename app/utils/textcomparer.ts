@@ -1,19 +1,10 @@
-const Diff = require('diff')
+var Diff = require('text-diff');
+var diff = new Diff({timeout: 0, }); 
 
-export default async function CompareTexts(text1: string, text2: string) {
-    const diff = Diff.diffChars(text1, text2);
-    let span = null;
-    const fragment = document.createDocumentFragment();
-    diff.forEach((part) => {
-        // green for additions, red for deletions
-        // grey for common parts
-        const color = part.added ? 'green' :
-            part.removed ? 'red' : 'grey';
-        span = document.createElement('span');
-        span.style.color = color;
-        span.appendChild(document
-            .createTextNode(part.value));
-        fragment.appendChild(span);
-    });
-    return fragment;
+export default async function CompareTexts(text1: string, text2: string){
+    var textDiff = diff.main(text1, text2);
+    const value =  diff.prettyHtml(textDiff);
+    console.log(value);
+    console.log(diff);
+    return value;
 }
