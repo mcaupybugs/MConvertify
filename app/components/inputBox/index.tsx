@@ -1,5 +1,7 @@
 'use client';
 import React, { useState } from 'react';
+import AceEditor from "react-ace";
+
 
 const InputBox = ({ heading, textCallback = null}) => {
 
@@ -19,7 +21,7 @@ const InputBox = ({ heading, textCallback = null}) => {
                 <div className='flex bg-slate-300 w-full h-10 text-black text-xl font-bold pl-2 items-center shadow-xl'>
                     {heading}
                 </div>
-                <textarea className='h-full w-full whitespace-pre-wrap flex-grow text-black focus:outline-none p-2 resize-none' onChange={handleTextAreaChange}></textarea>
+                <AceEditor className='h-full w-full whitespace-pre-wrap flex-grow text-black focus:outline-none p-2 resize-none' onChange={handleTextAreaChange}></AceEditor>
                 <div className='h-6 w-full flex flex-row bg-slate-200 justify-evenly pl-1 pr-1'>
                     <div className='flex flex-row w-full'>
                         <div className='flex w-full text-black items-center'>

@@ -14,9 +14,11 @@
     "@fortawesome/free-regular-svg-icons": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "ace-builds": "^1.35.4",
     "next": "14.2.5",
     "next-auth": "^5.0.0-beta.20",
     "react": "^18",
+    "react-ace": "^12.0.0",
     "react-dom": "^18",
     "text-diff": "^1.0.1"
   },
