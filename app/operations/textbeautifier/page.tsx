@@ -15,13 +15,13 @@ const TextBeautifier = () => {
     }
 
     return (
-        <div className='flex flex-col w-full h-full'>
-            <div className='flex w-full justify-center pt-2 h-20'>
+        <div className='flex flex-col w-full h-full max-h-screen'>
+            <div className='flex w-full justify-center pt-2 pb-2 h-20'>
                 <button className='h-14 w-36 rounded-full border-black border-2' onClick={(e) => handleOperate(e)}>Operate</button>
             </div>
             <div className='flex flex-1 flex-row w-full h-full justify-evenly'>
-                    <InputBox heading='Input' textCallback={getInputText}></InputBox>
-                    <OutputBox heading='Output' outputValue={outputData}></OutputBox>
+                <InputBox heading='Input' textCallback={getInputText}></InputBox>
+                <OutputBox heading='Output' outputValue={outputData}></OutputBox>
             </div>
         </div>
     )
