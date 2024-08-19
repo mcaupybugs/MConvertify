@@ -16,7 +16,7 @@ const TextComparer = () => {
                 </div>
             </div>
             <div className='flex flex-1 flex-row w-full h-full justify-evenly'>
-                <DiffEditor original='hey there' options={{ originalEditable: true }}></DiffEditor>
+                <DiffEditor options={{ originalEditable: true }}></DiffEditor>
             </div>
         </div>
     )
