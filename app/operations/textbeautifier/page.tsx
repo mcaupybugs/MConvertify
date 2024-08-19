@@ -21,7 +21,7 @@ const TextBeautifier = () => {
             </div>
             <div className='flex flex-1 flex-row w-full h-full justify-evenly'>
                 <InputBox heading='Input' textCallback={getInputText}></InputBox>
-                <OutputBox heading='Output' outputValue={outputData}></OutputBox>
+                <OutputBox heading='Output' textCallback={getInputText}></OutputBox>
             </div>
         </div>
     )

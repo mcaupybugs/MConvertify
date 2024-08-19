@@ -15,10 +15,13 @@ const InputBox = ({ heading, textCallback = null }) => {
     }
 
     return (
-        <div className='w-full h-full p-2 border-2'>
-            <div className='w-full h-full flex flex-col shadow-sm min-h-0'>
-                <div className='flex bg-slate-300 w-full h-10 text-black text-xl font-bold pl-2 items-center shadow-xl'>
-                    {heading}
+        <div className='w-full h-full p-2'>
+            <div className='w-full h-full flex flex-col shadow-sm min-h-0 border-2'>
+                <div className='w-full h-10 flex flex-row bg-slate-300 shadow-xl'>
+                    <div className='flex w-full h-full text-black text-xl font-bold pl-2 items-center'>
+                        {heading}
+                    </div>
+                    <div></div>
                 </div>
                 <div className='flex-1 overflow-auto'>
                     <Editor></Editor>
