@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Editor } from '@monaco-editor/react';
 import { Languages } from '@/app/enum/Languages';
 
@@ -9,11 +9,17 @@ const InputBox = ({ heading, textCallback = null }) => {
     const [linesCount, setLinesCount] = useState(0);
     const [selectedLanguage, setSelectedLanguage] = useState(Languages.TypeScript.toLocaleLowerCase());
 
-    const handleTextAreaChange = (newValue) => {
-        if (textCallback) {
-            textCallback(newValue);
+    const handleButtonPress = () => {
+        if (editorRef.current) {
+            editorRef.current.getAction('editor.action.formatDocument').run();
         }
     }
+
+    const editorRef = useRef();
+
+    const handleEditorDidMount = (editor, monaco) => {
+        editorRef.current = editor;
+    };
 
     const handleLanguageChange = (e) => {
         setSelectedLanguage(e.target.value.toLocaleLowerCase())
@@ -37,7 +43,7 @@ const InputBox = ({ heading, textCallback = null }) => {
                     </div>
                 </div>
                 <div className='flex-1 overflow-auto'>
-                    <Editor language={selectedLanguage}></Editor>
+                    <Editor language={selectedLanguage} onMount={handleEditorDidMount}></Editor>
                 </div>
                 <div className='h-6 w-full flex flex-row bg-slate-200 justify-evenly pl-1 pr-1'>
                     <div className='flex flex-row w-full'>
