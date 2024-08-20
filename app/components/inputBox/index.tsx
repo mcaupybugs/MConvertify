@@ -1,17 +1,22 @@
 'use client';
 import React, { useState } from 'react';
 import { Editor } from '@monaco-editor/react';
-
+import { Languages } from '@/app/enum/Languages';
 
 const InputBox = ({ heading, textCallback = null }) => {
 
     const [wordCount, setWordCount] = useState(0);
     const [linesCount, setLinesCount] = useState(0);
+    const [selectedLanguage, setSelectedLanguage] = useState(Languages.TypeScript.toLocaleLowerCase());
 
     const handleTextAreaChange = (newValue) => {
         if (textCallback) {
             textCallback(newValue);
         }
+    }
+
+    const handleLanguageChange = (e) => {
+        setSelectedLanguage(e.target.value.toLocaleLowerCase())
     }
 
     return (
@@ -22,27 +27,17 @@ const InputBox = ({ heading, textCallback = null }) => {
                         {heading}
                     </div>
                     <div className='h-full w-full flex flex-row gap-4'>
-                        <div className='w-full h-full'> {/* add the language */}
-                            <select id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option selected value="javascript">JS</option>
-                                <option value="CA">Canada</option>
-                                <option value="FR">France</option>
-                                <option value="DE">Germany</option>
-                            </select>
-                        </div>
-                        <div className='w-full h-full'>
-                            <select id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option selected>Choose a country</option>
-                                <option value="US">United States</option>
-                                <option value="CA">Canada</option>
-                                <option value="FR">France</option>
-                                <option value="DE">Germany</option>
+                        <div className='w-full h-full p-2'> {/* add the language */}
+                            <select id="countries" onChange={handleLanguageChange} className="rounded-md h-full bg-slate-300 border-none focus:outline-none">
+                                {Object.values(Languages).map((language) => (
+                                    <option value={language}>{language}</option>
+                                ))}
                             </select>
                         </div>
                     </div>
                 </div>
                 <div className='flex-1 overflow-auto'>
-                    <Editor></Editor>
+                    <Editor language={selectedLanguage}></Editor>
                 </div>
                 <div className='h-6 w-full flex flex-row bg-slate-200 justify-evenly pl-1 pr-1'>
                     <div className='flex flex-row w-full'>
