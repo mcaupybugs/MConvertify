@@ -1,6 +1,6 @@
 'use client';
-import React, { useState, useRef, MemoExoticComponent } from 'react';
-import { Editor } from '@monaco-editor/react';
+import React, { useState, useRef, MemoExoticComponent, useEffect } from 'react';
+import { Editor, useMonaco } from '@monaco-editor/react';
 import { Languages } from '@/app/enum/Languages';
 import * as monaco from 'monaco-editor';
 const WHITESPACE_REGEX: RegExp = /\s+/;
@@ -8,12 +8,41 @@ const NEWLINE: string = '\n';
 
 type EditorRef = React.MutableRefObject<monaco.editor.IStandaloneCodeEditor | null>
 
-interface InputBoxProps {
-    heading: string;
-    editorRef: EditorRef;
+interface EditorProps {
+    theme: monaco.editor.BuiltinTheme;
+    rules: monaco.editor.ITokenThemeRule[]
 }
 
-const InputBox: React.FC<InputBoxProps> = ({ heading, editorRef = null }) => {
+interface CustomEditorProps {
+    heading: string;
+    editorRef?: EditorRef;
+    editorProps?: EditorProps;
+}
+
+const CustomEditor: React.FC<CustomEditorProps> = ({ heading, editorRef = null, editorProps = null }) => {
+    const monaco = useMonaco();
+
+    useEffect(() => {
+        if (monaco) {
+            monaco.editor.defineTheme('customTheme', {
+                base: editorProps?.theme ? editorProps.theme : 'vs',
+                inherit: true,
+                rules: editorProps?.rules ? editorProps.rules : [],
+                colors: {},
+            });
+
+            monaco.languages.setMonarchTokensProvider('javascript', {
+                tokenizer: {
+                    root: [
+                        [/\b(keyword1|keyword2|keyword3)\b/, 'custom-keyword'],
+                        [/\b\d+\b/, 'custom-number'],
+                    ],
+                },
+            });
+
+            monaco.editor.setTheme('customTheme');
+        }
+    }, [monaco]);
 
     const [wordCount, setWordCount] = useState(0);
     const [linesCount, setLinesCount] = useState(0);
@@ -82,4 +111,4 @@ const InputBox: React.FC<InputBoxProps> = ({ heading, editorRef = null }) => {
     )
 }
 
-export default InputBox;
+export default CustomEditor;

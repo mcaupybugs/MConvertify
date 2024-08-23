@@ -1,5 +1,5 @@
 'use client';
-import InputBox from "@/app/components/inputBox";
+import CustomEditor from "@/app/components/customEditor";
 import React, { useRef } from "react";
 import * as monaco from 'monaco-editor';
 
@@ -19,7 +19,7 @@ const TextBeautifier = () => {
                 <button className='h-14 w-36 rounded-full border-black border-2' onClick={handleButtonPress}>Operate</button>
             </div>
             <div className='flex flex-1 flex-row w-full h-full justify-evenly'>
-                <InputBox heading='Input' editorRef={editorRef}></InputBox>
+                <CustomEditor heading='Input' editorRef={editorRef}></CustomEditor>
             </div>
         </div>
     )
