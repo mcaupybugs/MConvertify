@@ -4,28 +4,22 @@ import { Editor } from '@monaco-editor/react';
 import { Languages } from '@/app/enum/Languages';
 import * as monaco from 'monaco-editor';
 
-type TextCallback = (text: string) => void;
+type EditorRef = React.MutableRefObject<monaco.editor.IStandaloneCodeEditor | null>
 
 interface InputBoxProps {
     heading: string;
-    textCallback: TextCallback
+    editorRef: EditorRef;
 }
 
-const InputBox: React.FC<InputBoxProps> = ({ heading, textCallback = null }) => {
+const InputBox: React.FC<InputBoxProps> = ({ heading, editorRef = null }) => {
 
     const [wordCount, setWordCount] = useState(0);
     const [linesCount, setLinesCount] = useState(0);
     const [selectedLanguage, setSelectedLanguage] = useState(Languages.TypeScript.toLocaleLowerCase());
-    const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
-
-    const handleButtonPress = () => {
-        if (editorRef.current) {
-            editorRef.current.getAction('editor.action.formatDocument')?.run();
-        }
-    }
 
     const handleEditorDidMount = (editor: monaco.editor.IStandaloneCodeEditor, monaco: typeof import('monaco-editor')) => {
-        editorRef.current = editor;
+        if (editorRef)
+            editorRef.current = editor;
     };
 
     const handleLanguageChange = (e: any) => {
