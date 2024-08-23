@@ -3,7 +3,12 @@ import React, { useState, useRef } from 'react';
 import { Editor } from '@monaco-editor/react';
 import { Languages } from '@/app/enum/Languages';
 
-const InputBox = ({ heading, textCallback = null }) => {
+interface InputProps {
+    heading: string;
+    textCallback: null | undefined;
+}
+
+const InputBox: React.FC<InputProps> = ({ heading, textCallback = null }) => {
 
     const [wordCount, setWordCount] = useState(0);
     const [linesCount, setLinesCount] = useState(0);

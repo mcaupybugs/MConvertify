@@ -3,7 +3,14 @@ import SignIn from './signIn';
 import SignUp from './signUp';
 import { AuthType } from '@/app/enum/AuthEnum';
 
-const Modal = ({ toggleAuth, authCategory }) => {
+type ToggleAuth = (authCategory: AuthType) => void;
+
+interface ModalProps {
+    toggleAuth: ToggleAuth;
+    authCategory: AuthType;
+}
+
+const Modal: React.FC<ModalProps> = ({ toggleAuth, authCategory }) => {
 
     const signInButton = useRef(null);
     const signUpButton = useRef(null);
