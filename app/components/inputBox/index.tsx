@@ -3,6 +3,8 @@ import React, { useState, useRef, MemoExoticComponent } from 'react';
 import { Editor } from '@monaco-editor/react';
 import { Languages } from '@/app/enum/Languages';
 import * as monaco from 'monaco-editor';
+const WHITESPACE_REGEX: RegExp = /\s+/;
+const NEWLINE: string = '\n';
 
 type EditorRef = React.MutableRefObject<monaco.editor.IStandaloneCodeEditor | null>
 
@@ -16,6 +18,17 @@ const InputBox: React.FC<InputBoxProps> = ({ heading, editorRef = null }) => {
     const [wordCount, setWordCount] = useState(0);
     const [linesCount, setLinesCount] = useState(0);
     const [selectedLanguage, setSelectedLanguage] = useState(Languages.TypeScript.toLocaleLowerCase());
+
+    const handleEditorValueChange = (value: string | undefined) => {
+        if (value) {
+            const words = value.split(WHITESPACE_REGEX).filter(word => word.length > 0);
+            setWordCount(words.length);
+            setLinesCount(value.split(NEWLINE).length);
+        } else {
+            setWordCount(0);
+            setLinesCount(0);
+        }
+    }
 
     const handleEditorDidMount = (editor: monaco.editor.IStandaloneCodeEditor, monaco: typeof import('monaco-editor')) => {
         if (editorRef)
@@ -44,10 +57,10 @@ const InputBox: React.FC<InputBoxProps> = ({ heading, editorRef = null }) => {
                     </div>
                 </div>
                 <div className='flex-1 overflow-auto'>
-                    <Editor language={selectedLanguage} onMount={handleEditorDidMount}></Editor>
+                    <Editor language={selectedLanguage} onMount={handleEditorDidMount} onChange={handleEditorValueChange}></Editor>
                 </div>
                 <div className='h-6 w-full flex flex-row bg-slate-200 justify-evenly pl-1 pr-1'>
-                    <div className='flex flex-row w-full'>
+                    <div className='flex flex-row w-full h-full'>
                         <div className='flex w-full text-black items-center'>
                             <span className='text-xs items-center'>Words: {wordCount}</span>
                         </div>
