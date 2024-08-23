@@ -1,8 +1,8 @@
-FROM node:18
+FROM --platform=linux/amd64 node:18
 
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
 EXPOSE 3000
-CMD npm run dev
+CMD ["npm", "run", "dev"]
