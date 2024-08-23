@@ -1,32 +1,34 @@
 'use client';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, MemoExoticComponent } from 'react';
 import { Editor } from '@monaco-editor/react';
 import { Languages } from '@/app/enum/Languages';
+import * as monaco from 'monaco-editor';
 
-interface InputProps {
+type TextCallback = (text: string) => void;
+
+interface InputBoxProps {
     heading: string;
-    textCallback: null | undefined;
+    textCallback: TextCallback
 }
 
-const InputBox: React.FC<InputProps> = ({ heading, textCallback = null }) => {
+const InputBox: React.FC<InputBoxProps> = ({ heading, textCallback = null }) => {
 
     const [wordCount, setWordCount] = useState(0);
     const [linesCount, setLinesCount] = useState(0);
     const [selectedLanguage, setSelectedLanguage] = useState(Languages.TypeScript.toLocaleLowerCase());
+    const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
 
     const handleButtonPress = () => {
         if (editorRef.current) {
-            editorRef.current.getAction('editor.action.formatDocument').run();
+            editorRef.current.getAction('editor.action.formatDocument')?.run();
         }
     }
 
-    const editorRef = useRef();
-
-    const handleEditorDidMount = (editor, monaco) => {
+    const handleEditorDidMount = (editor: monaco.editor.IStandaloneCodeEditor, monaco: typeof import('monaco-editor')) => {
         editorRef.current = editor;
     };
 
-    const handleLanguageChange = (e) => {
+    const handleLanguageChange = (e: any) => {
         setSelectedLanguage(e.target.value.toLocaleLowerCase())
     }
 
@@ -40,8 +42,8 @@ const InputBox: React.FC<InputProps> = ({ heading, textCallback = null }) => {
                     <div className='h-full w-full flex flex-row gap-4'>
                         <div className='w-full h-full p-2'> {/* add the language */}
                             <select id="countries" onChange={handleLanguageChange} className="rounded-md h-full bg-slate-300 border-none focus:outline-none">
-                                {Object.values(Languages).map((language) => (
-                                    <option value={language}>{language}</option>
+                                {Object.values(Languages).map((language, index) => (
+                                    <option key={index} value={language}>{language}</option>
                                 ))}
                             </select>
                         </div>

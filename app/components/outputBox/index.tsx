@@ -3,7 +3,12 @@
 import React, { useEffect } from 'react';
 import AceEditor from "react-ace";
 
-const OutputBox = ({ heading, outputValue }) => {
+interface OutputBoxProps {
+    heading: string;
+    outputValue: string;
+}
+
+const OutputBox: React.FC<OutputBoxProps> = ({ heading, outputValue }) => {
 
     useEffect(() => {
         if (outputValue) {

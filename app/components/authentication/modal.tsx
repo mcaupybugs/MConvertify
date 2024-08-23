@@ -12,8 +12,8 @@ interface ModalProps {
 
 const Modal: React.FC<ModalProps> = ({ toggleAuth, authCategory }) => {
 
-    const signInButton = useRef(null);
-    const signUpButton = useRef(null);
+    const signInButton = useRef<HTMLButtonElement>(null);
+    const signUpButton = useRef<HTMLButtonElement>(null);
     const [modeActive, setModeActive] = useState(authCategory);
 
     const makeActive = (authSelected: AuthType) => {
