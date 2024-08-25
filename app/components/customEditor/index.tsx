@@ -8,41 +8,12 @@ const NEWLINE: string = '\n';
 
 type EditorRef = React.MutableRefObject<monaco.editor.IStandaloneCodeEditor | null>
 
-interface EditorProps {
-    theme: monaco.editor.BuiltinTheme;
-    rules: monaco.editor.ITokenThemeRule[]
-}
-
 interface CustomEditorProps {
     heading: string;
     editorRef?: EditorRef;
-    editorProps?: EditorProps;
 }
 
-const CustomEditor: React.FC<CustomEditorProps> = ({ heading, editorRef = null, editorProps = null }) => {
-    const monaco = useMonaco();
-
-    useEffect(() => {
-        if (monaco) {
-            monaco.editor.defineTheme('customTheme', {
-                base: editorProps?.theme ? editorProps.theme : 'vs',
-                inherit: true,
-                rules: editorProps?.rules ? editorProps.rules : [],
-                colors: {},
-            });
-
-            monaco.languages.setMonarchTokensProvider('javascript', {
-                tokenizer: {
-                    root: [
-                        [/\b(keyword1|keyword2|keyword3)\b/, 'custom-keyword'],
-                        [/\b\d+\b/, 'custom-number'],
-                    ],
-                },
-            });
-
-            monaco.editor.setTheme('customTheme');
-        }
-    }, [monaco]);
+const CustomEditor: React.FC<CustomEditorProps> = ({ heading, editorRef = null }) => {
 
     const [wordCount, setWordCount] = useState(0);
     const [linesCount, setLinesCount] = useState(0);
@@ -90,14 +61,14 @@ const CustomEditor: React.FC<CustomEditorProps> = ({ heading, editorRef = null, 
                 </div>
                 <div className='h-6 w-full flex flex-row bg-slate-200 justify-evenly pl-1 pr-1'>
                     <div className='flex flex-row w-full h-full'>
-                        <div className='flex w-full text-black items-center'>
+                        <div className='flex w-full h-full text-black items-center'>
                             <span className='text-xs items-center'>Words: {wordCount}</span>
                         </div>
-                        <div className='flex w-full text-black items-center'>
+                        <div className='flex w-full h-full text-black items-center'>
                             <span className='text-xs'>Lines: {linesCount}</span>
                         </div>
                     </div>
-                    <div className='flex flex-row w-full justify-evenly'>
+                    <div className='flex flex-row w-full justify-evenly h-full'>
                         <div className='text-center flex items-center text-xs text-black'>
                             Encoding: Raw Bytes
                         </div>
