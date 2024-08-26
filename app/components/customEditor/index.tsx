@@ -10,6 +10,7 @@ type EditorRef = React.MutableRefObject<monaco.editor.IStandaloneCodeEditor | nu
 
 export interface EditorConfigurations {
     subHeading?: string;
+    customTheme: boolean;
 }
 
 interface CustomEditorProps {
@@ -23,6 +24,36 @@ const CustomEditor: React.FC<CustomEditorProps> = ({ heading, editorRef = null, 
     const [wordCount, setWordCount] = useState(0);
     const [linesCount, setLinesCount] = useState(0);
     const [selectedLanguage, setSelectedLanguage] = useState(Languages.TypeScript.toLocaleLowerCase());
+
+    const monaco = useMonaco();
+
+    useEffect(() => {
+        if (monaco && editorConfigurations?.customTheme) {
+            monaco.languages.register({ id: 'bearerToken' });
+
+            monaco.languages.setMonarchTokensProvider('bearerToken', {
+                tokenizer: {
+                    root: [
+                        ['^[^.]+', 'header'],
+                        ['(?<=\.)[^.]+(?=\.)', 'payload'],
+                        ["[^.]+$", 'signature'],
+                    ],
+                },
+            });
+
+            monaco.editor.defineTheme('bearerTokenTheme', {
+                base: 'vs',
+                inherit: true,
+                rules: [
+                    { token: 'header', foreground: 'ff0000' },
+                    { token: 'payload', foreground: '00ff00' },
+                    { token: 'signature', foreground: '0000ff' }
+                ],
+                colors: {}
+            });
+        }
+    }, [monaco]);
+
 
     const handleEditorValueChange = (value: string | undefined) => {
         if (value) {
@@ -48,26 +79,31 @@ const CustomEditor: React.FC<CustomEditorProps> = ({ heading, editorRef = null, 
         <div className='w-full h-full p-2'>
             <div className='w-full h-full flex flex-col shadow-sm min-h-0 border-2'>
                 <div className='w-full h-10 flex flex-row bg-slate-300 shadow-xl'>
-                    <div className='flex w-full h-full text-black text-xl font-bold pl-2 items-center text-nowrap'>
+                    <div className='flex h-full text-black text-xl font-bold pl-2 items-center text-nowrap'>
                         {heading}
                     </div>
                     {editorConfigurations?.subHeading &&
-                        <div className='flex text-xs text-nowrap items-end pb-1'>
+                        <div className='flex text-xs text-nowrap items-end pb-1 pl-1'>
                             {editorConfigurations?.subHeading}
                         </div>
                     }
-                    <div className='h-full w-full flex flex-row gap-4 text-end pr-1'>
-                        <div className='w-full h-full p-2'> {/* add the language */}
-                            <select id="countries" onChange={handleLanguageChange} className="rounded-md h-full bg-slate-300 border-none focus:outline-none">
-                                {Object.values(Languages).map((language, index) => (
-                                    <option key={index} value={language}>{language}</option>
-                                ))}
-                            </select>
+                    {!editorConfigurations?.customTheme &&
+                        <div className='h-full w-full flex flex-row gap-4 text-end pr-1'>
+                            <div className='w-full h-full p-2'>
+                                <select id="countries" onChange={handleLanguageChange} className="rounded-md h-full bg-slate-300 border-none focus:outline-none">
+                                    {Object.values(Languages).map((language, index) => (
+                                        <option key={index} value={language}>{language}</option>
+                                    ))}
+                                </select>
+                            </div>
                         </div>
-                    </div>
+                    }
                 </div>
                 <div className='flex-1 overflow-auto'>
-                    <Editor language={selectedLanguage} onMount={handleEditorDidMount} onChange={handleEditorValueChange}></Editor>
+                    <Editor defaultLanguage="bearerToken"
+                        language={selectedLanguage}
+                        theme="bearerTokenTheme"
+                        onMount={handleEditorDidMount} onChange={handleEditorValueChange}></Editor>
                 </div>
                 <div className='h-6 w-full flex flex-row bg-slate-200 justify-evenly pl-1 pr-1'>
                     <div className='flex flex-row w-full h-full'>

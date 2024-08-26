@@ -5,8 +5,8 @@ import React from 'react';
 
 const JWTParser = () => {
 
-    const bearerInputEditorConfiguration = constructEditorConfiguration('(Enter encoded token)')
-    const bearerOutputEditorConfiguration = constructEditorConfiguration('(Payload details)')
+    const bearerInputEditorConfiguration = constructEditorConfiguration('(Enter encoded token)', true)
+    const bearerOutputEditorConfiguration = constructEditorConfiguration('(Payload details)', true)
     return (
         <div className="w-full h-full flex max-h-screen flex-col p-4">
             <div className="flex w-full justify-center h-20">
@@ -17,7 +17,7 @@ const JWTParser = () => {
                     <CustomEditor heading='Bearer Token' editorConfigurations={bearerInputEditorConfiguration}></CustomEditor>
                 </div>
                 <div className="w-full h-full flex flex-col min-h-0">
-                    <CustomEditor heading='Decoded Token'></CustomEditor>
+                    <CustomEditor heading='Decoded Token' editorConfigurations={bearerOutputEditorConfiguration}></CustomEditor>
                 </div>
             </div>
         </div>
