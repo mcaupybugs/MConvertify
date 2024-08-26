@@ -8,12 +8,17 @@ const NEWLINE: string = '\n';
 
 type EditorRef = React.MutableRefObject<monaco.editor.IStandaloneCodeEditor | null>
 
+export interface EditorConfigurations {
+    subHeading?: string;
+}
+
 interface CustomEditorProps {
     heading: string;
     editorRef?: EditorRef;
+    editorConfigurations?: EditorConfigurations;
 }
 
-const CustomEditor: React.FC<CustomEditorProps> = ({ heading, editorRef = null }) => {
+const CustomEditor: React.FC<CustomEditorProps> = ({ heading, editorRef = null, editorConfigurations = null }) => {
 
     const [wordCount, setWordCount] = useState(0);
     const [linesCount, setLinesCount] = useState(0);
@@ -43,10 +48,15 @@ const CustomEditor: React.FC<CustomEditorProps> = ({ heading, editorRef = null }
         <div className='w-full h-full p-2'>
             <div className='w-full h-full flex flex-col shadow-sm min-h-0 border-2'>
                 <div className='w-full h-10 flex flex-row bg-slate-300 shadow-xl'>
-                    <div className='flex w-full h-full text-black text-xl font-bold pl-2 items-center'>
+                    <div className='flex w-full h-full text-black text-xl font-bold pl-2 items-center text-nowrap'>
                         {heading}
                     </div>
-                    <div className='h-full w-full flex flex-row gap-4'>
+                    {editorConfigurations?.subHeading &&
+                        <div className='flex text-xs text-nowrap items-end pb-1'>
+                            {editorConfigurations?.subHeading}
+                        </div>
+                    }
+                    <div className='h-full w-full flex flex-row gap-4 text-end pr-1'>
                         <div className='w-full h-full p-2'> {/* add the language */}
                             <select id="countries" onChange={handleLanguageChange} className="rounded-md h-full bg-slate-300 border-none focus:outline-none">
                                 {Object.values(Languages).map((language, index) => (
