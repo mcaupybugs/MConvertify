@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useRef, MemoExoticComponent, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Editor, useMonaco } from '@monaco-editor/react';
 import { Languages } from '@/app/enum/Languages';
 import * as monaco from 'monaco-editor';
@@ -10,7 +10,11 @@ type EditorRef = React.MutableRefObject<monaco.editor.IStandaloneCodeEditor | nu
 
 export interface EditorConfigurations {
     subHeading?: string;
-    customTheme: boolean;
+    isCustomTheme: boolean;
+    customTheme: string;
+    customLanguage: string;
+    tokenizerRoot: [string, string][];
+    themeRules: monaco.editor.ITokenThemeRule[];
 }
 
 interface CustomEditorProps {
@@ -24,35 +28,29 @@ const CustomEditor: React.FC<CustomEditorProps> = ({ heading, editorRef = null, 
     const [wordCount, setWordCount] = useState(0);
     const [linesCount, setLinesCount] = useState(0);
     const [selectedLanguage, setSelectedLanguage] = useState(Languages.TypeScript.toLocaleLowerCase());
-
+    const [selectedTheme, setSelectedTheme] = useState('vs');
     const monaco = useMonaco();
 
     useEffect(() => {
-        if (monaco && editorConfigurations?.customTheme) {
-            monaco.languages.register({ id: 'bearerToken' });
+        if (monaco && editorConfigurations?.isCustomTheme) {
+            monaco.languages.register({ id: editorConfigurations?.customLanguage });
 
-            monaco.languages.setMonarchTokensProvider('bearerToken', {
+            monaco.languages.setMonarchTokensProvider(editorConfigurations?.customLanguage, {
                 tokenizer: {
-                    root: [
-                        ['^[^.]+', 'header'],
-                        ['(?<=\.)[^.]+(?=\.)', 'payload'],
-                        ["[^.]+$", 'signature'],
-                    ],
+                    root: editorConfigurations.tokenizerRoot,
                 },
             });
 
-            monaco.editor.defineTheme('bearerTokenTheme', {
+            monaco.editor.defineTheme(editorConfigurations?.customTheme, {
                 base: 'vs',
                 inherit: true,
-                rules: [
-                    { token: 'header', foreground: 'ff0000' },
-                    { token: 'payload', foreground: '00ff00' },
-                    { token: 'signature', foreground: '0000ff' }
-                ],
+                rules: editorConfigurations.themeRules,
                 colors: {}
             });
+            setSelectedLanguage(editorConfigurations?.customLanguage);
+            setSelectedTheme(editorConfigurations?.customTheme);
         }
-    }, [monaco]);
+    }, [monaco, editorConfigurations]);
 
 
     const handleEditorValueChange = (value: string | undefined) => {
@@ -87,7 +85,7 @@ const CustomEditor: React.FC<CustomEditorProps> = ({ heading, editorRef = null, 
                             {editorConfigurations?.subHeading}
                         </div>
                     }
-                    {!editorConfigurations?.customTheme &&
+                    {!editorConfigurations?.isCustomTheme &&
                         <div className='h-full w-full flex flex-row gap-4 text-end pr-1'>
                             <div className='w-full h-full p-2'>
                                 <select id="countries" onChange={handleLanguageChange} className="rounded-md h-full bg-slate-300 border-none focus:outline-none">
@@ -100,9 +98,9 @@ const CustomEditor: React.FC<CustomEditorProps> = ({ heading, editorRef = null, 
                     }
                 </div>
                 <div className='flex-1 overflow-auto'>
-                    <Editor defaultLanguage="bearerToken"
+                    <Editor
                         language={selectedLanguage}
-                        theme="bearerTokenTheme"
+                        theme={selectedTheme}
                         onMount={handleEditorDidMount} onChange={handleEditorValueChange}></Editor>
                 </div>
                 <div className='h-6 w-full flex flex-row bg-slate-200 justify-evenly pl-1 pr-1'>

@@ -1,12 +1,13 @@
-'use client'
+'use client;'
 import CustomEditor from '@/app/components/customEditor';
+import BearerOutputEditor from '@/app/components/customEditor/bearerOutputEditor';
+import { BEARER_PAGE_CONSTANTS, BEARER_PAGE_TOKENIZER_ROOT } from '@/app/constants';
 import { constructEditorConfiguration } from '@/app/utils/commonUtils';
 import React from 'react';
 
 const JWTParser = () => {
-
-    const bearerInputEditorConfiguration = constructEditorConfiguration('(Enter encoded token)', true)
-    const bearerOutputEditorConfiguration = constructEditorConfiguration('(Payload details)', true)
+    const bearerInputEditorConfiguration = constructEditorConfiguration('(Enter encoded token)', true, BEARER_PAGE_CONSTANTS.BEARER_TOKEN_THEME, BEARER_PAGE_CONSTANTS.BEARER_TOKEN_LANGUAGE, BEARER_PAGE_TOKENIZER_ROOT, BEARER_PAGE_CONSTANTS.BEARER_TOKEN_THEME_RULES)
+    const bearerOutputEditorConfiguration = constructEditorConfiguration('(Payload details)', false)
     return (
         <div className="w-full h-full flex max-h-screen flex-col p-4">
             <div className="flex w-full justify-center h-20">
@@ -17,7 +18,7 @@ const JWTParser = () => {
                     <CustomEditor heading='Bearer Token' editorConfigurations={bearerInputEditorConfiguration}></CustomEditor>
                 </div>
                 <div className="w-full h-full flex flex-col min-h-0">
-                    <CustomEditor heading='Decoded Token' editorConfigurations={bearerOutputEditorConfiguration}></CustomEditor>
+                    <BearerOutputEditor></BearerOutputEditor>
                 </div>
             </div>
         </div>
