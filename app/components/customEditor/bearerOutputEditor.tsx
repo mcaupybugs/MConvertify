@@ -1,6 +1,12 @@
-import React from 'react';
+'use client'
+import { BEARER_HEADER_CONTENT_DEFAULT, BEARER_OUTPUT_BLUE_COLOR, BEARER_OUTPUT_RED_COLOR, BEARER_OUTPUT_VOILET_COLOR, BEARER_PAYLOAD_CONTENT_DEFAULT } from '@/app/constants';
+import React, { useState } from 'react';
 
 const BearerOutputEditor = () => {
+    const [headerContent, setHeaderContent] = useState(JSON.stringify(BEARER_HEADER_CONTENT_DEFAULT));
+    const [payloadContent, setPayloadContent] = useState(JSON.stringify(BEARER_PAYLOAD_CONTENT_DEFAULT));
+    const [signatureContent, setSignatureContent] = useState("dummy");
+
     return (
         <div className='h-full w-full flex flex-col p-2'>
             <div className='w-full h-10 flex flex-row bg-slate-300 shadow-xl'>
@@ -12,9 +18,9 @@ const BearerOutputEditor = () => {
                 </div>
             </div>
             <div className='h-full w-full bg-white flex flex-col flex-1 overflow-auto border border-black-2 rounded-md'>
-                <DecodedTokenSections title="Header: " subtitle="ALGORITHM & TOKEN TYPE"></DecodedTokenSections>
-                <DecodedTokenSections title="Header: " subtitle="ALGORITHM & TOKEN TYPE"></DecodedTokenSections>
-                <DecodedTokenSections title="Header: " subtitle="ALGORITHM & TOKEN TYPE"></DecodedTokenSections>
+                <DecodedTokenSections title="HEADER: " subtitle="ALGORITHM & TOKEN TYPE" textColor={BEARER_OUTPUT_RED_COLOR} body={headerContent}></DecodedTokenSections>
+                <DecodedTokenSections title="PAYLOAD: " subtitle="DATA" textColor={BEARER_OUTPUT_VOILET_COLOR} body={payloadContent}></DecodedTokenSections>
+                <DecodedTokenSections title="VERIFY SIGNATURE" textColor={BEARER_OUTPUT_BLUE_COLOR} body={signatureContent}></DecodedTokenSections>
             </div>
         </div>
     )
@@ -22,22 +28,24 @@ const BearerOutputEditor = () => {
 
 interface DecodedTokenPayload {
     title: string,
-    subtitle: string,
+    subtitle?: string,
+    textColor: string,
+    body: string,
 }
 
-const DecodedTokenSections: React.FC<DecodedTokenPayload> = ({ title, subtitle }) => {
+const DecodedTokenSections: React.FC<DecodedTokenPayload> = ({ title, subtitle, textColor, body }) => {
     return (
-        <div className='h-full w-full flex flex-col overflow-none'>
-            <div className='h-8 w-full flex border border-black-2 flex-row pl-2'>
-                <div className='flex'>
+        <div className='h-full w-full flex flex-col overflow-none text-xs items-center'>
+            <div className='h-6 w-full flex border border-black-2 flex-row pl-2'>
+                <div className='flex items-center'>
                     {title}
                 </div>
-                <div className='flex'>
+                <div className='flex pl-2 text-slate-400 items-center'>
                     {subtitle}
                 </div>
             </div>
-            <div className='h-full flex-1 w-full'>
-                content
+            <div className='h-full flex-1 w-full p-2'>
+                <span style={{ color: textColor }}>{body}</span>
             </div>
         </div>
     )
