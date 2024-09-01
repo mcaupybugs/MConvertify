@@ -1,5 +1,5 @@
 'use client'
-import { BEARER_HEADER_CONTENT_DEFAULT, BEARER_OUTPUT_BLUE_COLOR, BEARER_OUTPUT_RED_COLOR, BEARER_OUTPUT_VOILET_COLOR, BEARER_PAYLOAD_CONTENT_DEFAULT } from '@/app/constants';
+import { BEARER_OUTPUT_BLUE_COLOR, BEARER_OUTPUT_RED_COLOR, BEARER_OUTPUT_VOILET_COLOR } from '@/app/constants';
 import React, { useRef, useState } from 'react';
 import JsonFormatter from 'react-json-formatter'
 
@@ -9,8 +9,6 @@ interface BearerOutputEditorPayload {
 }
 
 const BearerOutputEditor: React.FC<BearerOutputEditorPayload> = ({ headerHtml, payloadHtml }) => {
-    const [headerContent, setHeaderContent] = useState(JSON.stringify(BEARER_HEADER_CONTENT_DEFAULT));
-    const [payloadContent, setPayloadContent] = useState(JSON.stringify(BEARER_PAYLOAD_CONTENT_DEFAULT));
     const [signatureContent, setSignatureContent] = useState("dummy");
 
     const splitBearer = () => {

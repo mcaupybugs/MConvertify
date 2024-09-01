@@ -1,7 +1,7 @@
 'use client'
 import CustomEditor from '@/app/components/customEditor';
 import BearerOutputEditor from '@/app/components/customEditor/bearerOutputEditor';
-import { BEARER_PAGE_CONSTANTS, BEARER_PAGE_TOKENIZER_ROOT } from '@/app/constants';
+import { BEARER_HEADER_CONTENT_DEFAULT, BEARER_PAGE_CONSTANTS, BEARER_PAGE_TOKENIZER_ROOT, BEARER_PAYLOAD_CONTENT_DEFAULT } from '@/app/constants';
 import { base64Decode, constructEditorConfiguration } from '@/app/utils/commonUtils';
 import React, { useRef, useState } from 'react';
 import * as monaco from 'monaco-editor';
@@ -9,8 +9,8 @@ import * as monaco from 'monaco-editor';
 
 
 const JWTParser = () => {
-    const [headerHtml, setHeaderHtml] = useState('');
-    const [payloadHtml, setPayloadHtml] = useState('');
+    const [headerHtml, setHeaderHtml] = useState(BEARER_HEADER_CONTENT_DEFAULT);
+    const [payloadHtml, setPayloadHtml] = useState(BEARER_PAYLOAD_CONTENT_DEFAULT);
 
     const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
     const data = {
