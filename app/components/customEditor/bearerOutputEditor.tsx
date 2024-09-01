@@ -14,6 +14,11 @@ const BearerOutputEditor: React.FC<BearerOutputEditorPayload> = ({ headerHtml, p
     const handleAlgorithmChange = (e: any) => {
         setHashingAlgorithm(e.target.value.toLocaleLowerCase())
     }
+
+    const verifyToken = () => {
+        return false;
+    }
+
     return (
         <div className='h-full w-full flex flex-col p-2'>
             <div className='w-full h-10 flex flex-row bg-slate-300 shadow-xl'>
@@ -33,6 +38,15 @@ const BearerOutputEditor: React.FC<BearerOutputEditorPayload> = ({ headerHtml, p
                 <DecodedTokenSections title="HEADER: " subtitle="ALGORITHM & TOKEN TYPE" textColor={BEARER_OUTPUT_RED_COLOR} body={headerHtml}></DecodedTokenSections>
                 <DecodedTokenSections title="PAYLOAD: " subtitle="DATA" textColor={BEARER_OUTPUT_VOILET_COLOR} body={payloadHtml}></DecodedTokenSections>
                 <DecodedTokenSections title="VERIFY SIGNATURE" textColor={BEARER_OUTPUT_BLUE_COLOR} signatureAlgorithm={hashingAlgorithm}></DecodedTokenSections>
+            </div>
+            <div className='h-6 w-full flex flex-row bg-slate-200 justify-evenly pl-1 pr-1'>
+                {verifyToken() ? (
+                    <div className='bg-blue-600'>
+                        Hey there
+                    </div>
+                ) : (
+                    <div className='h-full w-full bg-red-600'>Come on</div>
+                )}
             </div>
         </div>
     )

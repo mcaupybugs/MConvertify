@@ -28,7 +28,6 @@ const JWTParser = () => {
     }
 
     const bearerInputEditorConfiguration = constructEditorConfiguration('(Enter encoded token)', true, BEARER_PAGE_CONSTANTS.BEARER_TOKEN_THEME, BEARER_PAGE_CONSTANTS.BEARER_TOKEN_LANGUAGE, BEARER_PAGE_TOKENIZER_ROOT, BEARER_PAGE_CONSTANTS.BEARER_TOKEN_THEME_RULES, { wordWrap: 'on' }, BEARER_TOKEN_DEFAULT)
-    const bearerOutputEditorConfiguration = constructEditorConfiguration('(Payload details)', false)
     return (
         <div className="w-full h-full flex max-h-screen flex-col p-4">
             <div className="flex w-full justify-center h-20">
