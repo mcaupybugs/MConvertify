@@ -1,7 +1,7 @@
 'use client'
 import CustomEditor from '@/app/components/customEditor';
 import BearerOutputEditor from '@/app/components/customEditor/bearerOutputEditor';
-import { BEARER_HEADER_CONTENT_DEFAULT, BEARER_PAGE_CONSTANTS, BEARER_PAGE_TOKENIZER_ROOT, BEARER_PAYLOAD_CONTENT_DEFAULT } from '@/app/constants';
+import { BEARER_HEADER_CONTENT_DEFAULT, BEARER_PAGE_CONSTANTS, BEARER_PAGE_TOKENIZER_ROOT, BEARER_PAYLOAD_CONTENT_DEFAULT, BEARER_TOKEN_DEFAULT } from '@/app/constants';
 import { base64Decode, constructEditorConfiguration } from '@/app/utils/commonUtils';
 import React, { useRef, useState } from 'react';
 import * as monaco from 'monaco-editor';
@@ -27,7 +27,7 @@ const JWTParser = () => {
         }
     }
 
-    const bearerInputEditorConfiguration = constructEditorConfiguration('(Enter encoded token)', true, BEARER_PAGE_CONSTANTS.BEARER_TOKEN_THEME, BEARER_PAGE_CONSTANTS.BEARER_TOKEN_LANGUAGE, BEARER_PAGE_TOKENIZER_ROOT, BEARER_PAGE_CONSTANTS.BEARER_TOKEN_THEME_RULES, { wordWrap: 'on' })
+    const bearerInputEditorConfiguration = constructEditorConfiguration('(Enter encoded token)', true, BEARER_PAGE_CONSTANTS.BEARER_TOKEN_THEME, BEARER_PAGE_CONSTANTS.BEARER_TOKEN_LANGUAGE, BEARER_PAGE_TOKENIZER_ROOT, BEARER_PAGE_CONSTANTS.BEARER_TOKEN_THEME_RULES, { wordWrap: 'on' }, BEARER_TOKEN_DEFAULT)
     const bearerOutputEditorConfiguration = constructEditorConfiguration('(Payload details)', false)
     return (
         <div className="w-full h-full flex max-h-screen flex-col p-4">

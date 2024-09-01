@@ -2,7 +2,7 @@ import { EditorConfigurations } from "../components/customEditor";
 import { Buffer } from "buffer";
 import * as monaco from 'monaco-editor';
 
-export const constructEditorConfiguration = (subHeading: string, isCustomTheme?: boolean, customTheme?: string, customLanguage?: string, tokenizerRoot?: [string, string][], themeRule?: monaco.editor.ITokenThemeRule[], editorOptions?: monaco.editor.IStandaloneEditorConstructionOptions) => {
+export const constructEditorConfiguration = (subHeading: string, isCustomTheme?: boolean, customTheme?: string, customLanguage?: string, tokenizerRoot?: [string, string][], themeRule?: monaco.editor.ITokenThemeRule[], editorOptions?: monaco.editor.IStandaloneEditorConstructionOptions, defaultValue?: string) => {
     var editorConfigurations: EditorConfigurations = {
         subHeading: subHeading,
         isCustomTheme: isCustomTheme || false,
@@ -10,7 +10,8 @@ export const constructEditorConfiguration = (subHeading: string, isCustomTheme?:
         customLanguage: customLanguage || '',
         tokenizerRoot: tokenizerRoot || [],
         themeRules: themeRule || [],
-        options: editorOptions
+        options: editorOptions,
+        defaultValue: defaultValue
     }
     return editorConfigurations;
 }

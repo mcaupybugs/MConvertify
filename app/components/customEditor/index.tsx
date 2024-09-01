@@ -16,6 +16,7 @@ export interface EditorConfigurations {
     tokenizerRoot: [string, string][];
     themeRules: monaco.editor.ITokenThemeRule[];
     options?: monaco.editor.IStandaloneEditorConstructionOptions;
+    defaultValue?: string;
 }
 
 interface CustomEditorProps {
@@ -103,7 +104,8 @@ const CustomEditor: React.FC<CustomEditorProps> = ({ heading, editorRef = null, 
                         language={selectedLanguage}
                         theme={selectedTheme}
                         options={editorConfigurations?.options}
-                        onMount={handleEditorDidMount} onChange={handleEditorValueChange}></Editor>
+                        onMount={handleEditorDidMount} onChange={handleEditorValueChange}
+                        defaultValue={editorConfigurations?.defaultValue}></Editor>
                 </div>
                 <div className='h-6 w-full flex flex-row bg-slate-200 justify-evenly pl-1 pr-1'>
                     <div className='flex flex-row w-full h-full'>
