@@ -7,9 +7,10 @@ import JsonFormatter from 'react-json-formatter'
 interface BearerOutputEditorPayload {
     headerHtml: string;
     payloadHtml: string;
+    signatureEncoded: string;
 }
 
-const BearerOutputEditor: React.FC<BearerOutputEditorPayload> = ({ headerHtml, payloadHtml }) => {
+const BearerOutputEditor: React.FC<BearerOutputEditorPayload> = ({ headerHtml, payloadHtml, signatureEncoded }) => {
     const [hashingAlgorithm, setHashingAlgorithm] = useState(HashingAlgorithm.HMACSHA256);
     const handleAlgorithmChange = (e: any) => {
         setHashingAlgorithm(e.target.value.toLocaleLowerCase())

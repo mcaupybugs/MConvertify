@@ -13,12 +13,6 @@ const JWTParser = () => {
     const [payloadHtml, setPayloadHtml] = useState(BEARER_PAYLOAD_CONTENT_DEFAULT);
 
     const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
-    const data = {
-        active: true,
-        mode: '🚃',
-        codes: [48348, 28923, 39080],
-        city: 'London',
-    };
     const handleOnOperateClick = () => {
         if (editorRef?.current && editorRef?.current.getValue()) {
             const inputBearerTokenComponents = editorRef.current.getValue()?.split('.');
