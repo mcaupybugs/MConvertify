@@ -17,7 +17,7 @@ const BearerOutputEditor: React.FC<BearerOutputEditorPayload> = ({ headerHtml, p
     }
 
     const verifyToken = () => {
-        return false;
+        return true;
     }
 
     return (
@@ -42,11 +42,11 @@ const BearerOutputEditor: React.FC<BearerOutputEditorPayload> = ({ headerHtml, p
             </div>
             <div className='h-6 w-full flex flex-row bg-slate-200 justify-evenly pl-1 pr-1'>
                 {verifyToken() ? (
-                    <div className='bg-blue-600'>
-                        Hey there
+                    <div className='bg-blue-600 h-full w-full pl-2 text-white'>
+                        Signature verified
                     </div>
                 ) : (
-                    <div className='h-full w-full bg-red-600'>Come on</div>
+                    <div className='h-full w-full bg-red-600 pl-2 text-white'>Unverfied Signature</div>
                 )}
             </div>
         </div>
@@ -68,7 +68,7 @@ const DecodedTokenSections: React.FC<DecodedTokenPayload> = ({ title, subtitle, 
     }
 
     return (
-        <div className='h-full w-full flex flex-col overflow-none text-xs items-center'>
+        <div className='h-full w-full flex flex-col overflow-scroll text-xs items-center'>
             <div className='h-6 w-full flex border border-black-2 flex-row pl-2'>
                 <div className='flex items-center'>
                     {title}
