@@ -6,7 +6,7 @@ const TextComparer = () => {
     return (
         <div className='flex flex-col w-full h-full p-2'>
             <div className='flex flex-row gap-2 h-10'>
-                <div className='h-full w-full bg-slate-300 h-10 text-black text-xl flex flex-row justify evenly font-bold items-center shadow-xl pl-2'>
+                <div className='w-full bg-slate-300 h-10 text-black text-xl flex flex-row justify evenly font-bold items-center shadow-xl pl-2'>
                     <div className='w-full'>
                         Input 1
                     </div>
